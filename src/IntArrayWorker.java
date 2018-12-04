@@ -84,5 +84,28 @@ public class IntArrayWorker {
 			}
 		}
 	}
+	public int getCount(int x) {
+		int count = 0;
+		for(int i = 0; i <matrix.length; i++){
+			if(matrix[i] == x[0]){
+				count = count+1;
+			}
 
+		}
+}
+
+public int getLargest() {
+	int largest;
+	for(int i = 0; i < matrix.length-1; i++ )
+	{
+		int p1 = i +1;
+		if(matrix[i] > matrix[p1]){
+			largest = matrix[i];
+		}
+		if(matrix[i] < matrix[p1]){
+			largest = matrix[p1];
+		}
+	}
+		return largest;
+}
 }
