@@ -11,6 +11,7 @@ $ git checkout a1
 
 Read instructions for activity 1 in `Picture Lab Student Guide.pdf`.
 
+
 `answers.md` has been provided for you to write the answers to any questions asked in the Student Guide.
 
 Make commits to this branch as you complete the steps outlined in the activity.
