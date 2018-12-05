@@ -55,7 +55,7 @@ public class PictureTester
     temple.mirrorTemple();
     temple.explore();
   }
-  
+
   /** Method to test the collage method */
   public static void testCollage()
   {
@@ -63,6 +63,13 @@ public class PictureTester
     canvas.createCollage();
     canvas.explore();
   }
+	public static void testCopy2()
+	{
+		Picture flower1 = new Picture("flower1.jpg");
+    flower1.explore();
+		flower1.copy2( flower1 , 0 , 200 , 10 , 100);
+		flower1.explore();
+	}
   
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
@@ -107,6 +114,20 @@ public class PictureTester
     caterpillar.mirrorDiagonal();
     caterpillar.explore();
   }
+  public static void testMirrorArms()
+  {
+    Picture caterpillar = new Picture("snowman.jpg");
+    caterpillar.explore();
+    caterpillar.mirrorArms();
+    caterpillar.explore();
+  }
+  public static void testMirrorGull()
+  {
+    Picture caterpillar = new Picture("seagull.jpg");
+    caterpillar.explore();
+    caterpillar.mirrorGull();
+    caterpillar.explore();
+  }
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
@@ -123,9 +144,9 @@ public class PictureTester
     //testGrayscale();
    // testFixUnderwater();
    // testMirrorVertical();
-    //testMirrorTemple();
+   // testMirrorTemple();
     //testMirrorArms();
-    //testMirrorGull();
+   // testMirrorGull();
     //testMirrorDiagonal();
     //testCollage();
     //testCopy();
@@ -140,5 +161,8 @@ public class PictureTester
     //testmirrorVerticalRightToLeft();
     //testmirrorHorizontal();
     //testmirrorHorizontalBottomToTop();
+    testCollage();
+    //testCopy2();
+
   }
 }

@@ -108,6 +108,7 @@ public class Picture extends SimplePicture {
 		// loop through the rows
 		for (int row = 27; row < 97; row++) {
 			// loop from 13 to just before the mirror point
+				count = count + 1;
 			for (int col = 13; col < mirrorPoint; col++) {
 
 				leftPixel = pixels[row][col];
@@ -115,6 +116,7 @@ public class Picture extends SimplePicture {
 				rightPixel.setColor(leftPixel.getColor());
 			}
 		}
+		   System.out.println(count);
 	}
 
 	/**
@@ -143,23 +145,63 @@ public class Picture extends SimplePicture {
 			}
 		}
 	}
+public void copy2(Picture fromPic, int startRow, int endRow, int startCol, int endCol)
+  {
+    Pixel fromPixel = null;
+    Pixel toPixel = null;
+    Pixel[][] toPixels = this.getPixels2D();
+    Pixel[][] fromPixels = fromPic.getPixels2D();
+    for (int fromRow = 0, toRow = startRow; 
+         fromRow < fromPixels.length &&
+         toRow < endRow;
+         fromRow++, toRow++)
+    {
+      for (int fromCol = 0, toCol = startCol; 
+           fromCol < fromPixels[0].length &&
+           toCol < endCol;  
+           fromCol++, toCol++)
+      {
+        fromPixel = fromPixels[fromRow][fromCol];
+        toPixel = toPixels[toRow][toCol];
+        toPixel.setColor(fromPixel.getColor());
+      }
+    } 
+  }
 
 	/** Method to create a collage of several pictures */
-	public void createCollage() {
-		Picture flower1 = new Picture("flower1.jpg");
-		Picture flower2 = new Picture("flower2.jpg");
-		this.copy(flower1, 0, 0);
-		this.copy(flower2, 100, 0);
-		this.copy(flower1, 200, 0);
-		Picture flowerNoBlue = new Picture(flower2);
-		flowerNoBlue.zeroBlue();
-		this.copy(flowerNoBlue, 300, 0);
-		this.copy(flower1, 400, 0);
-		this.copy(flower2, 500, 0);
-		this.mirrorVertical();
-		this.write("collage.jpg");
-	}
+  public void createCollage()
+  {
+    Picture flower1 = new Picture("flower1.jpg");
+    Picture flower2 = new Picture("flower2.jpg");
+    Picture gull = new Picture("seagull.jpg");
+    
+    this.copy2(flower1,0,100, 0, 100);
+	this.copy2(gull, 100,250, 100, 400);
+    int mirrorPoint = 98;
+    Pixel rightPixel = null;
+    Pixel leftPixel = null;
+    Pixel[][] pixels = this.getPixels2D();   
+    for (int row = 0; row < 98; row++)
+    {
+      for (int col = 0; col < 88; col++)
+      {
+        rightPixel = pixels[row][col];      
+        leftPixel = pixels[mirrorPoint - row + mirrorPoint][col];
+        leftPixel.setColor(rightPixel.getColor());
+      }
+    }
 
+   
+    
+    this.write("collage.jpg");
+  }
+  
+  public void myCollage()
+  {
+      Picture flower1 = new Picture("flower1.jpg");
+      this.copy2(flower1,10,20, 0, 100);
+      this.write("mycollage.jpg");
+  }
 	/**
 	 * Method to show large changes in color
 	 * 
@@ -284,7 +326,7 @@ public class Picture extends SimplePicture {
 
 
 
-  
+
   public void mirrorHorizontal()
   {
       Pixel[][] pixels = this.getPixels2D();
@@ -338,5 +380,61 @@ public class Picture extends SimplePicture {
           }
       }
   }
+    public void mirrorArms()
+  {
+    int mirrorPoint = 193;
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    Pixel[][] pixels = this.getPixels2D();
+
+    // Left arm
+    for (int row = 158; row < mirrorPoint; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 103; col < 170; col++)
+      {
+        topPixel = pixels[row][col];      
+        bottomPixel = pixels[mirrorPoint - row + mirrorPoint][col];
+        bottomPixel.setColor(topPixel.getColor());
+      }
+    }
+    
+    int mirrorPoint2 = 198;
+    Pixel topPixel2 = null;
+    Pixel bottomPixel2 = null;
+    
+    // Right arm
+    for (int row = 171; row < mirrorPoint2; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 239; col < 294; col++)
+      {
+        topPixel2 = pixels[row][col];      
+        bottomPixel2 = pixels[mirrorPoint2 - row + mirrorPoint2][col];
+        bottomPixel2.setColor(topPixel2.getColor());
+      }
+    }
+  }
+  
+  public void mirrorGull()
+  {
+    int mirrorPoint = 345;
+    Pixel rightPixel = null;
+    Pixel leftPixel = null;
+    Pixel[][] pixels = this.getPixels2D();   
+    
+    // Seagull
+    for (int row = 235; row < 323; row++)
+    {
+      for (int col = 238; col < mirrorPoint; col++)
+      {
+        rightPixel = pixels[row][col];      
+        leftPixel = pixels[row][mirrorPoint - col + mirrorPoint/3];
+        leftPixel.setColor(rightPixel.getColor());
+      }
+    }
+  }
+
+  
 
 } // this } is the end of class Picture, put all new methods before this
